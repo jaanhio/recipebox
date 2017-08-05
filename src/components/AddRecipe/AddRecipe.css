@@ -1,0 +1,20 @@
+.button {
+  position: relative;
+  left: 15%; }
+
+.ReactModal__Content {
+  width: 75%;
+  height: 300px;
+  margin: auto auto;
+  border-radius: 10px !important; }
+
+.ReactModalPortal > div {
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.2) !important; }
+
+.ReactModalPortal .ReactModal__Overlay {
+  transition: opacity 200ms linear; }
+  .ReactModalPortal .ReactModal__Overlay--after-open {
+    opacity: 1; }
+  .ReactModalPortal .ReactModal__Overlay--before-close {
+    opacity: 0; }

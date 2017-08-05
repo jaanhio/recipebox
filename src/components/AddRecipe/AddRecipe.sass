@@ -1,0 +1,27 @@
+.button
+  position: relative
+  left: 15%
+
+.ReactModal__Content
+  width: 75%
+  height: 300px
+  margin: auto auto
+  border-radius: 10px !important
+  // &--after-open
+  //   background-color: pink !important
+  // transform: translate3d(-50%, -50%, 0px)
+  // animation-duration: 0.4s
+  // animation-fill-mode: forwards
+  // animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1)
+
+.ReactModalPortal > div
+  opacity: 0
+  background-color: rgba(0,0,0,0.2) !important
+
+.ReactModalPortal .ReactModal__Overlay
+  transition: opacity 200ms linear
+  // background-color: rgba(0,0,0,0.85)
+  &--after-open
+    opacity: 1
+  &--before-close
+    opacity: 0
