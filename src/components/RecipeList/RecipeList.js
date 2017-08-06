@@ -9,8 +9,8 @@ deleteRecipe(id){
   this.props.onDelete(id);
 }
 
-editRecipe(id, recipe){
-  this.props.onEdit(id, recipe);
+editRecipe(index){
+  
 }
 
   render(){
@@ -18,9 +18,9 @@ editRecipe(id, recipe){
     let recipeItem;
 
     if(this.props.recipes){
-      recipeItem=this.props.recipes.map(recipe => {
+      recipeItem=this.props.recipes.map((recipe) => {
         return(
-          <RecipeItem onEdit={this.editRecipe.bind(this)} onDelete={this.deleteRecipe.bind(this)} key={recipe.id} recipe={recipe} />
+          <RecipeItem onEdit={this.editRecipe.bind(this)} onDelete={this.deleteRecipe.bind(this)} key={recipe.id} recipe={recipe}/>
         )
       });
     }

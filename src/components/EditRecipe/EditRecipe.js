@@ -11,6 +11,11 @@ class RecipeEdit extends Component{
   constructor(props){
     super(props);
     this.state = {
+      // revisedRecipe:{
+      //   id: this.props.recipe.id,
+      //   food: "",
+      //   ingredients: []
+      // },
       revisedRecipe:{
         id: this.props.recipe.id,
         food: this.props.recipe.food,
@@ -28,7 +33,13 @@ class RecipeEdit extends Component{
   }
 
   closeModal(){
-    this.setState({modalIsOpen: false});
+    this.setState({
+      modalIsOpen: false,
+      // revisedRecipe:{
+      //   food: this.props.recipe.food,
+      //   ingredients: this.props.recipe.ingredients
+      // }
+    });
   }
 
   handleSubmit(e){
@@ -36,32 +47,55 @@ class RecipeEdit extends Component{
     e.preventDefault();
     const revised = this.state.revisedRecipe;
 
-    this.props.editRecipe(revised);
+    this.props.editRecipe(this.state.revisedRecipe);
 
   }
 
 
   handleNameChange(e){
     this.setState({revisedRecipe:{
-      food: e.target.value
+      food: e.target.value,
+      ingredients: this.state.revisedRecipe.ingredients
     }
   });
   }
 
+  // handleNameChange(e){
+  //   let id = this.state.currentRecipe.id;
+  //   let food = this.state.currentRecipe.food;
+  //   let ingredients = this.state.currentRecipe.ingredients;
+  //
+  //   this.setState({revisedRecipe:{
+  //     food: food
+  //   }
+  // });
+  // }
+
   handleIndChange(e){
     this.setState({revisedRecipe:{
-      ingredients: e.target.value.split(",")
+      food: this.state.revisedRecipe.food,
+      ingredients: e.target.value/*.split(",")*/
     }
   });
   }
+
+  // handleIndChange(e){
+  //   let id = this.state.currentRecipe.id;
+  //   let food = this.state.currentRecipe.food;
+  //   let ingredients = this.state.currentRecipe.ingredients;
+  //   this.setState({revisedRecipe:{
+  //     ingredients: ingredients
+  //   }
+  // });
+  // }
 
 
 
   render(){
     const speed = this.state.speed;
-    let recipe=this.props.recipe;
-    let foodName=this.state.revisedRecipe.food;
-    let ingredients=recipe.ingredients;
+    // let recipe=this.props.recipe;
+    // let foodName=this.state.revisedRecipe.food;
+    // let ingredients=recipe.ingredients;
 
     return(
       <div>

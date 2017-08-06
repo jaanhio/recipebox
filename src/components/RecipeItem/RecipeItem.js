@@ -8,8 +8,12 @@ class RecipeItem extends Component{
     this.props.onDelete(id);
   }
 
-  editRecipe(id, recipe){
-    this.props.onEdit(id, recipe);
+  // editRecipe(id, revised){
+  //   this.props.onEdit(id, revised);
+  // }
+
+  editRecipe(){
+      this.props.onEdit(this.props.index);
   }
 
   render(){
@@ -40,7 +44,7 @@ class RecipeItem extends Component{
             <button className="button is-warning is-outlined" onClick={this.deleteRecipe.bind(this, this.props.recipe.id)}>
               Delete
             </button>
-            <EditRecipe recipe={this.props.recipe} editRecipe={this.editRecipe.bind(this, this.props.recipe.id, recipe)}/>
+            <EditRecipe recipe={this.props.recipe} editRecipe={this.editRecipe.bind(this, this.props.recipe.id)}/>
           </div>
           </nav>
         </Collapsible>

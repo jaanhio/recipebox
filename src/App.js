@@ -11,7 +11,9 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      recipes:[]
+      recipes:[],
+      newRecipeTitle:"",
+      newRecipeInd:""
     };
   }
 
@@ -42,7 +44,9 @@ class App extends Component {
 
   handleAddRecipe(recipe){
     let recipes = this.state.recipes;
+    console.log(recipes);
     recipes.push(recipe);
+    console.log(recipes);
     this.setState({recipes: recipes});
   }
 
@@ -53,10 +57,12 @@ class App extends Component {
     this.setState({recipes: recipes});
   }
 
-  handleEditRecipe(id, recipe){
+  handleEditRecipe(id, revised){
     let recipes = this.state.recipes;
+    console.log(recipes);
     let index = recipes.findIndex(x => x.id === id);
-    recipes.splice(index,1,recipe);
+    recipes.splice(index,1,revised);
+    console.log(recipes);
     this.setState({recipes: recipes});
   }
 
