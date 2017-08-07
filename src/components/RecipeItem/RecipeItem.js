@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import Collapsible from 'react-collapsible';
 import EditRecipe from '../EditRecipe/EditRecipe';
+import './RecipeItem.css';
 
 class RecipeItem extends Component{
+
+  constructor(props){
+    super(props);
+    this.state={
+      revisedRecipe:[]
+    };
+  }
 
   deleteRecipe(id){
     this.props.onDelete(id);
@@ -12,8 +20,8 @@ class RecipeItem extends Component{
   //   this.props.onEdit(id, revised);
   // }
 
-  editRecipe(){
-      this.props.onEdit(this.props.index);
+  editRecipe(id){
+      this.props.onEdit(id);
   }
 
   render(){
@@ -41,10 +49,13 @@ class RecipeItem extends Component{
           </p>
           {ingredientItem}
           <div className="panel-block">
-            <button className="button is-warning is-outlined" onClick={this.deleteRecipe.bind(this, this.props.recipe.id)}>
+            <button id="delete" className="button is-warning is-outlined" onClick={this.deleteRecipe.bind(this, this.props.recipe.id)}>
               Delete
             </button>
-            <EditRecipe recipe={this.props.recipe} editRecipe={this.editRecipe.bind(this, this.props.recipe.id)}/>
+            <button id="edit" className="button is-warning is-outlined" onClick={this.editRecipe.bind(this, this.props.recipe.id)}>
+              Edit
+            </button>
+            <EditRecipe recipe={this.props.recipe} editRecipe={this.editRecipe.bind(this,this.props.recipe.id)}/>
           </div>
           </nav>
         </Collapsible>

@@ -1,36 +1,33 @@
 import React, { Component } from 'react';
-import RecipeForm from '../RecipeForm/RecipeForm';
-// import './EditRecipe.css';
+import './EditRecipe.css';
 import Modal from 'react-modal';
 import uuid from 'uuid';
-// import Modal from 'boron/DropModal';
-// import './RecipeList.css';
 
-class RecipeEdit extends Component{
+class EditRecipe extends Component{
 
   constructor(props){
     super(props);
     this.state = {
-      // revisedRecipe:{
-      //   id: this.props.recipe.id,
-      //   food: "",
-      //   ingredients: []
-      // },
-      revisedRecipe:{
-        id: this.props.recipe.id,
-        food: this.props.recipe.food,
-        ingredients: this.props.recipe.ingredients
+      revisedRecipe:{},
+      currentRecipe:{
+        // id: this.props.tempRecipe.id,
+        id: 3,
+        // food: this.props.tempRecipe.food,
+        food: "sotong",
+        // ingredients: this.props.tempRecipe.ingredients
+        ingredients: ["tentacles", "ink"]
       },
-      modalIsOpen: false,
+      modalIsOpen: this.props.editMode,
+      // modalIsOpen: true,
       speed: 100
     };
-    this.openModal = this.openModal.bind(this);
+    // this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
-  openModal(){
-    this.setState({modalIsOpen: true});
-  }
+  // openModal(){
+  //   this.setState({modalIsOpen: true});
+  // }
 
   closeModal(){
     this.setState({
@@ -43,19 +40,28 @@ class RecipeEdit extends Component{
   }
 
   handleSubmit(e){
-
     e.preventDefault();
-    const revised = this.state.revisedRecipe;
-
-    this.props.editRecipe(this.state.revisedRecipe);
-
+    if(this.refs.recipeName.value===""){
+      alert("Recipe name is required!");
+    }
+    else{
+      this.setState({revisedRecipe:{
+        id: this.state.currentRecipe.id,
+        food: this.refs.recipeName.value,
+        ingredients: this.refs.ingredients.value.split(","),
+        modalIsOpen: false
+      }}, function(){
+        this.props.saveChanges(this.state.revisedRecipe);
+      });
+    }
   }
 
 
   handleNameChange(e){
-    this.setState({revisedRecipe:{
+    this.setState({currentRecipe:{
+      id: this.state.currentRecipe.id,
       food: e.target.value,
-      ingredients: this.state.revisedRecipe.ingredients
+      ingredients: this.state.currentRecipe.ingredients
     }
   });
   }
@@ -72,8 +78,9 @@ class RecipeEdit extends Component{
   // }
 
   handleIndChange(e){
-    this.setState({revisedRecipe:{
-      food: this.state.revisedRecipe.food,
+    this.setState({currentRecipe:{
+      id: this.state.currentRecipe.id,
+      food: this.state.currentRecipe.food,
       ingredients: e.target.value/*.split(",")*/
     }
   });
@@ -99,7 +106,6 @@ class RecipeEdit extends Component{
 
     return(
       <div>
-        <button className="button is-primary" onClick={this.openModal}>Edit Recipe</button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
@@ -112,12 +118,12 @@ class RecipeEdit extends Component{
           <form onSubmit={this.handleSubmit.bind(this)}>
             <label className="label">Recipe</label>
             <div className="control">
-              <input className="input" type="text" placeholder="Recipe Name" ref="recipeName" value={this.state.revisedRecipe.food} onChange={this.handleNameChange.bind(this)}/>
+              <input className="input" type="text" placeholder="Recipe Name" ref="recipeName" value={this.state.currentRecipe.food} onChange={this.handleNameChange.bind(this)}/>
             </div>
             <div className="field">
             <label className="label">Ingredients</label>
             <div className="control has-icons-left has-icons-right">
-              <input className="input" type="text" placeholder="Enter ingredients. (if more than 1 ingredient, separate them with commas)" ref="ingredients" value={this.state.revisedRecipe.ingredients} onChange={this.handleIndChange.bind(this)}/>
+              <input className="input" type="text" placeholder="Enter ingredients. (if more than 1 ingredient, separate them with commas)" ref="ingredients" value={this.state.currentRecipe.ingredients} onChange={this.handleIndChange.bind(this)}/>
               <span className="icon is-small is-left">
                 <i className="fa fa-flask"></i>
               </span>
@@ -125,10 +131,10 @@ class RecipeEdit extends Component{
             </div>
             <div className="field is-grouped">
               <div className="control">
-                <button className="button is-primary" onClick={this.closeModal}>Edit Recipe</button>
+                <button className="button is-primary" onClick={this.closeModal}>Save Changes</button>
               </div>
               <div className="control">
-                <button className="button" onClick={this.closeModal}>Cancel</button>
+                <button id="two" className="button" onClick={this.closeModal}>Cancel</button>
               </div>
             </div>
             </form>
@@ -139,4 +145,4 @@ class RecipeEdit extends Component{
   }
 }
 
-export default RecipeEdit;
+export default EditRecipe;
